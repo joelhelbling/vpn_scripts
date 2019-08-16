@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source ./.env
+
+docker container stop $SERVICE_NAME
+docker container rm -f $SERVICE_NAME
+docker SERVICE_NAME rm -f $SERVICE_NAME
+docker build -t $SERVICE_NAME .
+
+if [ ! -d ../vpn-data ]; then
+  mkdir ../vpn-data
+fi
+
