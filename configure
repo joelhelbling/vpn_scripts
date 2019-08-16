@@ -4,7 +4,7 @@ source ./.env
 
 IP_ADDRESS=`ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1`
 
-pushd $DOCKER_VPN_PATH
+pushd ..
 # Generate OpenVPN config file
 docker run -v $PWD/vpn-data:/etc/openvpn --name $SERVICE_NAME --rm $SERVICE_NAME ovpn_genconfig -u udp://$IP_ADDRESS:3000
 

@@ -4,16 +4,10 @@ USER=$1
 
 source ./.env
 
-pushd $DOCKER_VPN_PATH
-# docker run \
-#   --rm  -it $SERVICE_NAME \
-#   -v $PWD/vpn-data:/etc/openvpn \
-#   easyrsa build-client-full $USER nopass
+pushd ..
+# create key
 docker run -v $PWD/vpn-data:/etc/openvpn --rm -it $SERVICE_NAME easyrsa build-client-full $USER nopass
 
-# docker run \
-#   --rm $SERVICE_NAME \
-#   -v $PWD/vpn-data:/etc/openvpn \
-#   ovpn_getclient $USER
-docker run -v $PWD/vpn-data:/etc/openvpn --rm $SERVICE_NAME ovpn_getclient $USER > $USER.ovpn
+# generate client file
+docker run -v $PWD/vpn-data:/etc/openvpn --rm $SERVICE_NAME ovpn_getclient $USER > $CLIENT_FILES_PATH/$USER.ovpn
 popd
