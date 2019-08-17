@@ -1,0 +1,10 @@
+#!/bin/bash
+
+USER=$1
+
+source ./.env
+
+pushd ..
+# revoke client key
+docker run -v $PWD/vpn-data:/etc/openvpn --rm -it $SERVICE_NAME ovpn_revokeclient $USER remove
+popd
