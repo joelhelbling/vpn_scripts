@@ -3,5 +3,5 @@
 source ./.env
 
 pushd ..
-docker run -v $PWD/vpn-data:/etc/openvpn --name $SERVICE_NAME -d -p 3000:1194/udp --cap-add=NET_ADMIN $SERVICE_NAME
+docker run -v $PWD/vpn-data:/etc/openvpn --restart always --name $SERVICE_NAME -d -p 3000:1194/udp --cap-add=NET_ADMIN $SERVICE_NAME
 popd

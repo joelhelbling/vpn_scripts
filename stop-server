@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source ./.env
+
+pushd ..
+docker stop $SERVICE_NAME
+popd
