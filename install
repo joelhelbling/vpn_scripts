@@ -6,6 +6,10 @@ docker stop $SERVICE_NAME || true && docker rm $SERVICE_NAME || true
 docker image rm -f $SERVICE_NAME || true
 
 pushd $DOCKER_VPN_PATH
+for file in bin/ovpn_genconfig test/tests/conf_options/container.sh; do
+  sed -i 's/8\.8\.8\.8/1.1.1.1/g' $file
+  sed -i 's/8\.8\.4\.4/1.0.0.1/g' $file
+done
 docker build -t $SERVICE_NAME .
 
 if [ ! -d ../vpn-data ]; then
